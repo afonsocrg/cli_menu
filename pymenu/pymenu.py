@@ -21,7 +21,6 @@ def command(name):
         def wrapper():
             return f()
 
-        # key = f.__name__ if name is None else name
         key = name
         commands[key] = wrapper
         return wrapper
