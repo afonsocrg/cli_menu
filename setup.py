@@ -6,6 +6,6 @@ setup(
     description='A simple library for creating CLI menus in Python',
     author='afonsocrg',
     author_email='afonso.crg@gmail.com',
-    packages=find_packages(),
+    packages=['pymenu'],
     install_requires=[],
 )
