@@ -26,11 +26,11 @@ def _exit():
 
 
 def print_menu(
-    order_formatter: Callable[[int], str] = str,
     item_formatter: Callable[[str, str], str] = lambda order, name: f"{order}. {name}",
+    order_formatter: Callable[[int], str] = str,
     order_start: int = 1,
-    exit_name: str = "Exit",
     exit_order_last: bool = False,
+    exit_name: str = "Exit",
 ) -> dict:
     # This is the mapping of the symbol that the user will input to the command that will be executed
     menu_items = {}
