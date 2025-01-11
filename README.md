@@ -76,11 +76,11 @@ Parameters:
 - `prompt: (str, optional)` - Input prompt text. Defaults to `"Enter choice: "`;
 - `show_menu_on_invalid: (bool, optional)` -  Re-display menu if the user inserts an invalid option. Defaults to `False`;
 - `show_menu_on_empty: (bool, optional)` - Re-display menu after empty input. Defaults to `False`;
-- `order_formatter: (Callable[[int], str], optional)` - Function to format menu item numbers. By default returns the string representation of the number;
 - `item_formatter: (Callable[[str, str], str], optional)` - Function to format menu items. Defaults to "{order}. {name}";
+- `order_formatter: (Callable[[int], str], optional)` - Function to format menu item numbers. By default returns the string representation of the number;
 - `order_start: (int, optional)` - Starting number for menu items. Defaults to 1;
-- `exit_name: (str, optional)` - Text for exit option. Defaults to "Exit";
 - `exit_order_last: (bool, optional)` - If this option is True, the exit command will be Place exit option last instead of 0. Defaults to `False`;
+- `exit_name: (str, optional)` - Text for exit option. Defaults to "Exit";
 
 ```python
 # Basic usage
