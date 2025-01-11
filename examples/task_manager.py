@@ -1,4 +1,5 @@
-from pymenu import command, run_menu
+#! /usr/bin/env python3
+from cli_menu import command, run_menu
 
 tasks = []
 
