@@ -1,15 +1,9 @@
 from functools import wraps
+from typing import Callable
 
+commands = {}
 
-def exit():
-    print("Exiting...")
-    return False
-
-
-commands = {"Exit": exit}
-
-
-def command(name):
+def command(name: str) -> Callable[[Callable], Callable]:
     """
     This decorator registers the decorated function as a command.
     If name is specified, it will be used as the command name,
@@ -27,12 +21,19 @@ def command(name):
 
     return decorator
 
+def _exit():
+    raise SystemExit
 
-def print_menu():
+def print_menu() -> dict:
     menu_items = {}
     for i, name in list(enumerate(commands.keys(), start=1)):
         print(f"{i}. {name}")
         menu_items[str(i)] = commands[name]
+    
+    # Add exit command
+    print("0. Exit")
+    menu_items["0"] = _exit
+
     return menu_items
 
 
@@ -49,8 +50,8 @@ def menu():
 
 
 def run_menu():
-    # Put the exit command at the end
-    exit_command = commands.pop("Exit")
-    commands["Exit"] = exit_command
-    while menu() != False:
-        pass
+    try:
+        while True:
+            menu()
+    except SystemExit:
+        print("Exiting...")
