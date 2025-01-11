@@ -1,5 +1,5 @@
 #! /usr/bin/env python3
-from cli_menu import command, run_menu
+from yacli_menu import command, run_menu
 import os
 
 @command("List Directory Contents")

@@ -1,19 +1,19 @@
-# `cli_menu`
+# yacli_menu
 
-`cli_menu` simplifies the creation of CLI menus and interactive command-line interfaces.
+`yacli_menu` simplifies the creation of CLI menus and interactive command-line interfaces.
 It allows you to define commands, prompt the user for input, and execute the chosen command.
 
 ## Installation
 
 ```bash
-pip install cli_menu
+pip install yacli_menu
 ```
 
 ## Example
 
 ```python
 # file: example.py
-from cli_menu import command, run_menu
+from yacli_menu import command, run_menu
 
 @command("Add Numbers")
 def add():
@@ -97,7 +97,7 @@ run_menu(
 
 ## Contributing
 
-Contributions to `cli_menu` are welcome! If you find issues or have suggestions for improvements, please open an [issue](https://github.com/afonsocrg/cli_menu/issues) or submit a [pull request](https://github.com/afonsocrg/cli_menu/pulls).
+Contributions to `yacli_menu` are welcome! If you find issues or have suggestions for improvements, please open an [issue](https://github.com/afonsocrg/yacli_menu/issues) or submit a [pull request](https://github.com/afonsocrg/yacli_menu/pulls).
 
 ## License
 
