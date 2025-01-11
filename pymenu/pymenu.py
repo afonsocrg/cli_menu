@@ -64,3 +64,7 @@ def run_menu(**kwargs):
             menu(**kwargs)
     except SystemExit:
         print("Exiting...")
+    except KeyboardInterrupt:
+        print("\nExiting...")
+    except EOFError:
+        print("\n End of input. Exiting...")
