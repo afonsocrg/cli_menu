@@ -1,49 +1,104 @@
-# PyMenu - CLI Menu Creation Made Easy
+# `cli_menu`
 
-PyMenu is a Python library that simplifies the creation of CLI menus and interactive command-line interfaces. It allows you to define commands, prompt the user for input, and execute the chosen command effortlessly. Whether you are building a simple command-line tool or a more complex interactive application, PyMenu can streamline the process and enhance user experience.
+`cli_menu` simplifies the creation of CLI menus and interactive command-line interfaces.
+It allows you to define commands, prompt the user for input, and execute the chosen command.
 
 ## Installation
 
-You can install PyMenu using pip:
-
 ```bash
-pip install pymenu
+pip install cli_menu
 ```
 
-## Usage
-Creating CLI Menus
-
-To get started with PyMenu, first import the library and create commands using the @command decorator. Each decorated function defines a command:
+## Example
 
 ```python
-from pymenu import command, run_menu
+# file: example.py
+from cli_menu import command, run_menu
 
-@command("Do something")
-def do_something():
-    print("You chose to do something!")
+@command("Add Numbers")
+def add():
+    a = float(input("Enter first number: "))
+    b = float(input("Enter second number: "))
+    print(f"Result: {a + b}")
 
-@command("Do another thing")
-def do_another_thing():
-    print("You chose to do another thing!")
+@command("Subtract Numbers")
+def subtract():
+    a = float(input("Enter first number: "))
+    b = float(input("Enter second number: "))
+    print(f"Result: {a - b}")
+
+@command("Multiply Numbers")
+def multiply():
+    a = float(input("Enter first number: "))
+    b = float(input("Enter second number: "))
+    print(f"Result: {a * b}")
 
 if __name__ == "__main__":
-    run_menu()
+    run_menu() 
 
 ```
-
-## Running the pyMenu
-When you run the script, PyMenu will display the registered commands and prompt the user for input. The user can select a command by entering the corresponding number, and PyMenu will execute the associated function:
 
 ```bash
 $ python example.py
-1. Do something
-2. Do another thing
-Enter command number: 1
-You chose to do something!
+1. Add Numbers
+2. Subtract Numbers
+3. Multiply Numbers
+Enter command: 1
+...
 ```
 
-With PyMenu, you can easily create interactive CLI applications, manage user input, and execute commands, making your command-line tools more user-friendly.
+
+## API Reference
+
+### `@command(name: str)`
+
+Decorator that registers a function as a menu command.
+
+Parameters:
+- `name` (str): The name that will be displayed in the menu for this command
+
+The decorated function should take no arguments.
+
+```python
+@command("Your command name")
+def your_function():
+    # ... command implementation ...
+    pass
+```
+
+### `run_menu(**kwargs)`
+
+Starts the interactive menu loop.
+
+Parameters:
+- `prompt: (str, optional)` - Input prompt text. Defaults to `"Enter choice: "`;
+- `show_menu_on_invalid: (bool, optional)` -  Re-display menu if the user inserts an invalid option. Defaults to `False`;
+- `show_menu_on_empty: (bool, optional)` - Re-display menu after empty input. Defaults to `False`;
+- `order_formatter: (Callable[[int], str], optional)` - Function to format menu item numbers. By default returns the string representation of the number;
+- `item_formatter: (Callable[[str, str], str], optional)` - Function to format menu items. Defaults to "{order}. {name}";
+- `order_start: (int, optional)` - Starting number for menu items. Defaults to 1;
+- `exit_name: (str, optional)` - Text for exit option. Defaults to "Exit";
+- `exit_order_last: (bool, optional)` - If this option is True, the exit command will be Place exit option last instead of 0. Defaults to `False`;
+
+```python
+# Basic usage
+run_menu()
+
+# Customized menu
+run_menu(
+    prompt="> ",
+    show_menu_on_invalid=True,
+    item_formatter=lambda o, n: f"{o}) {n}",
+    exit_name="Quit",
+)
+```
 
 ## Contributing
 
-Contributions to PyMenu are welcome! If you find issues or have suggestions for improvements, please open an issue or submit a pull request.
+Contributions to `cli_menu` are welcome! If you find issues or have suggestions for improvements, please open an [issue](https://github.com/afonsocrg/cli_menu/issues) or submit a [pull request](https://github.com/afonsocrg/cli_menu/pulls).
+
+## License
+
+Licensed under the Apache License 2.0, Copyright © 2023-present afonsocrg
+
+See [LICENSE](./LICENSE) for more information.
