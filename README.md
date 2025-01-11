@@ -47,6 +47,8 @@ Enter command: 1
 ...
 ```
 
+You can find more examples in the [examples](./examples) directory.
+
 
 ## API Reference
 
