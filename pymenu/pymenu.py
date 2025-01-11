@@ -24,21 +24,30 @@ def command(name: str) -> Callable[[Callable], Callable]:
 def _exit():
     raise SystemExit
 
-def print_menu() -> dict:
+
+def print_menu(
+    order_formatter: Callable[[int], str] = str,
+    display_formatter: Callable[[str, str], str] = lambda order, name: f"{order}. {name}"
+) -> dict:
+    # This is the mapping of the symbol that the user will input to the command that will be executed
     menu_items = {}
+
+    # Starting from 1 because 0 is reserved for the exit command
     for i, name in list(enumerate(commands.keys(), start=1)):
-        print(f"{i}. {name}")
-        menu_items[str(i)] = commands[name]
+        order = order_formatter(i)
+        print(display_formatter(order, name))
+        menu_items[order] = commands[name]
     
-    # Add exit command
-    print("0. Exit")
-    menu_items["0"] = _exit
+    # Add exit command (always using "0")
+    order = order_formatter(0)
+    print(display_formatter(order, "Exit"))
+    menu_items[order] = _exit
 
     return menu_items
 
 
-def menu(prompt: str = "Enter choice: "):
-    mapping = print_menu()
+def menu(prompt: str = "Enter choice: ", **kwargs):
+    mapping = print_menu(**kwargs)
     choice = ""
     while choice.strip() == "":
         choice = input(prompt)
