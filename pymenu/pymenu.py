@@ -46,17 +46,28 @@ def print_menu(
     return menu_items
 
 
-def menu(prompt: str = "Enter choice: ", **kwargs):
+def menu(
+    prompt: str = "Enter choice: ",
+    print_menu_on_invalid: bool = False,
+    print_menu_on_empty: bool = False,
+    **kwargs
+):
     mapping = print_menu(**kwargs)
-    choice = ""
-    while choice.strip() == "":
-        choice = input(prompt)
+    choice = None
+    while choice is None:
+        choice = input(prompt).strip()
+        if choice in mapping:
+            return mapping[choice]()
+        else:
+            if choice == "":
+                if print_menu_on_empty:
+                    print_menu(**kwargs)
+            else:
+                print("Invalid choice. Try again.")
+                if print_menu_on_invalid:
+                    print_menu(**kwargs)
 
-    try:
-        return mapping[choice]()
-    except KeyError:
-        print("Invalid choice. Try again.")
-
+            choice = None
 
 def run_menu(**kwargs):
     try:
