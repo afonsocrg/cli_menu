@@ -25,7 +25,10 @@ if __name__ == "__main__":
     run_menu(
       prompt="> ",
       order_formatter=lambda order: chr(order + ord('a') - 1) if order > 0 else 'x',
-      display_formatter=lambda order, name: f"{order}) {name}",
-      # print_menu_on_invalid=True,
-      print_menu_on_empty=True
+      item_formatter=lambda order, name: f"{order}) {name}",
+      # show_menu_on_invalid=True,
+      show_menu_on_empty=True,
+      # exit_order_last=True,
+      # order_start=10,
+      exit_name="Quit"
     ) 

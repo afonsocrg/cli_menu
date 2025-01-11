@@ -27,20 +27,23 @@ def _exit():
 
 def print_menu(
     order_formatter: Callable[[int], str] = str,
-    display_formatter: Callable[[str, str], str] = lambda order, name: f"{order}. {name}"
+    item_formatter: Callable[[str, str], str] = lambda order, name: f"{order}. {name}",
+    order_start: int = 1,
+    exit_name: str = "Exit",
+    exit_order_last: bool = False,
 ) -> dict:
     # This is the mapping of the symbol that the user will input to the command that will be executed
     menu_items = {}
 
     # Starting from 1 because 0 is reserved for the exit command
-    for i, name in list(enumerate(commands.keys(), start=1)):
+    for i, name in list(enumerate(commands.keys(), start=order_start)):
         order = order_formatter(i)
-        print(display_formatter(order, name))
+        print(item_formatter(order, name))
         menu_items[order] = commands[name]
     
-    # Add exit command (always using "0")
-    order = order_formatter(0)
-    print(display_formatter(order, "Exit"))
+    exit_order = len(commands.keys()) + order_start if exit_order_last  else 0
+    order = order_formatter(exit_order)
+    print(item_formatter(order, exit_name))
     menu_items[order] = _exit
 
     return menu_items
@@ -48,8 +51,8 @@ def print_menu(
 
 def menu(
     prompt: str = "Enter choice: ",
-    print_menu_on_invalid: bool = False,
-    print_menu_on_empty: bool = False,
+    show_menu_on_invalid: bool = False,
+    show_menu_on_empty: bool = False,
     **kwargs
 ):
     mapping = print_menu(**kwargs)
@@ -60,11 +63,11 @@ def menu(
             return mapping[choice]()
         else:
             if choice == "":
-                if print_menu_on_empty:
+                if show_menu_on_empty:
                     print_menu(**kwargs)
             else:
                 print("Invalid choice. Try again.")
-                if print_menu_on_invalid:
+                if show_menu_on_invalid:
                     print_menu(**kwargs)
 
             choice = None
