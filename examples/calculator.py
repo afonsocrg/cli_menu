@@ -22,4 +22,4 @@ def multiply():
     return True
 
 if __name__ == "__main__":
-    run_menu() 
+    run_menu(prompt="> ") 

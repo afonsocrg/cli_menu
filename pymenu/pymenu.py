@@ -37,11 +37,11 @@ def print_menu() -> dict:
     return menu_items
 
 
-def menu():
+def menu(prompt: str = "Enter choice: "):
     mapping = print_menu()
     choice = ""
     while choice.strip() == "":
-        choice = input("Enter choice: ")
+        choice = input(prompt)
 
     try:
         return mapping[choice]()
@@ -49,9 +49,9 @@ def menu():
         print("Invalid choice. Try again.")
 
 
-def run_menu():
+def run_menu(**kwargs):
     try:
         while True:
-            menu()
+            menu(**kwargs)
     except SystemExit:
         print("Exiting...")
